@@ -1,0 +1,27 @@
+[submodule "roles/dehydrated"]
+	path = roles/dehydrated
+	url = https://github.com/punktDe/proserver-ansible-dehydrated.git
+[submodule "roles/mariadb"]
+	path = roles/mariadb
+	url = https://github.com/punktDe/proserver-ansible-mariadb.git
+[submodule "roles/elasticsearch"]
+	path = roles/elasticsearch
+	url = https://github.com/punktDe/proserver-ansible-elasticsearch.git
+[submodule "roles/mail"]
+	path = roles/mail
+	url = https://github.com/punktDe/proserver-ansible-mail.git
+[submodule "roles/redis"]
+	path = roles/redis
+	url = https://github.com/punktDe/proserver-ansible-redis.git
+[submodule "roles/nginx"]
+	path = roles/nginx
+	url = https://github.com/punktDe/proserver-ansible-nginx.git
+[submodule "roles/mailhog"]
+	path = roles/mailhog
+	url = https://github.com/punktDe/proserver-ansible-mailhog.git
+[submodule "roles/php"]
+	path = roles/php
+	url = https://github.com/punktDe/proserver-ansible-php.git
+[submodule "roles/punktde_vars"]
+	path = roles/punktde_vars
+	url = git@gitlab.pluspunkthosting.de:awx/punktde_vars.git

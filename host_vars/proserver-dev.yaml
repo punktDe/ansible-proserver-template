@@ -1,0 +1,32 @@
+---
+environment_name: development
+mail:
+  enable_mta: no
+mailhog:
+  domain: mailhog.proserver-dev.local
+mariadb:
+  databases:
+    demo:
+      name: demo
+  users:
+    demo:
+      username: demo
+      password: demo
+      hosts:
+        demo: localhost
+      privileges:
+        demo: "demo.*:all"
+elasticsearch:
+  elasticsearch.yml:
+    cluster.name: proserver-dev
+nginx:
+  # The default value, 4096, would take way longer to provision (initially).
+  # We won't need TLS in development anyway.
+  dhparam_bits: 1024
+php:
+  xdebug:
+    # Takes too much performance, so we disable it by default.
+    # You can enable/disable it on the fly by using the "xdebug" command on the command line.
+    disable_by_default: yes
+demo:
+  domain: demo.proserver-dev.local

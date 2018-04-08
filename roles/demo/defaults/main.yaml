@@ -1,0 +1,6 @@
+---
+demo:
+  prefix:
+    current_release: /var/www
+  basic_auth: {}
+privileged_subnets: {}

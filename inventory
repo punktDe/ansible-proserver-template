@@ -1,0 +1,46 @@
+###
+# Host definitions
+###
+testing ansible_ssh_host=vpro0000.proserver.punkt.de ansible_ssh_user=vpro0000 environment_name=testing
+staging ansible_ssh_host=vpro0000.proserver.punkt.de ansible_ssh_user=vpro0000 environment_name=staging
+production ansible_ssh_host=vpro0000.proserver.punkt.de ansible_ssh_user=vpro0000 environment_name=production
+
+
+###
+# Meta groups
+###
+[meta]
+testing
+staging
+production
+
+[meta-test]
+testing
+
+
+###
+# Groups
+###
+[mail]
+[mail:children]
+meta
+
+[redis]
+[redis:children]
+meta
+
+[mariadb]
+[mariadb:children]
+meta
+
+[elasticsearch]
+[elasticsearch:children]
+meta
+
+[mailhog]
+[mailhog:children]
+meta-test
+
+[demo]
+[demo:children]
+meta

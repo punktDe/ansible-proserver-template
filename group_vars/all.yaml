@@ -1,0 +1,8 @@
+---
+#supported_ansible_version:
+#  major: 2
+#  minor: 4
+#  revision: "*"
+ansible_python_interpreter: /usr/local/bin/python2
+dehydrated:
+  ca: https://acme-v01.api.letsencrypt.org/directory

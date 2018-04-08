@@ -1,0 +1,33 @@
+---
+mail:
+  aliases:
+    root: noreply@example.com
+    proserver: noreply@example.com
+    vpro0000: noreply@example.com
+mailhog:
+  domain: mailhog.vpro0000.proserver.punkt.de
+  basic_auth:
+    username: passsword
+mariadb:
+  databases:
+    demo:
+      name: demo
+  users:
+    demo:
+      username: demo
+      password: demo
+      hosts:
+        demo: localhost
+      privileges:
+        demo: "demo.*:all"
+elasticsearch:
+  elasticsearch.yml:
+    cluster.name: proserver-demo
+dehydrated:
+  domains:
+    #Common_Name: ['Subject', 'Alternative', 'Names']
+    #vpro0000.proserver.punkt.de: []
+demo:
+  domain: vpro0000.proserver.punkt.de
+  basic_auth:
+    username: passsword

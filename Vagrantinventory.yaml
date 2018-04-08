@@ -1,0 +1,35 @@
+###
+# Meta groups
+###
+meta:
+  - proserver-dev
+meta-test:
+  - proserver-dev
+
+
+###
+# Groups
+###
+mail:
+'mail:children':
+  - meta
+
+redis:
+'redis:children':
+  - meta
+
+mariadb:
+'mariadb:children':
+  - meta
+
+elasticsearch:
+'elasticsearch:children':
+  - meta
+
+mailhog:
+'mailhog:children':
+  - meta
+
+demo:
+'demo:children':
+  - meta

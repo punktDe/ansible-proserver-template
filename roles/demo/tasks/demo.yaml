@@ -1,0 +1,11 @@
+---
+- name: Template web site
+  template: src="{{ item }}" dest="{{ render_path }}"
+  loop_control:
+    label: "{{ render_path }}"
+  vars:
+    template_dir: "{{ role_path }}/templates/www"
+    render_path: "{{ demo.prefix.current_release }}/{{ item|strip_prefix(template_dir + '/') }}"
+  with_fileglob:
+    - "{{ template_dir }}/*.php"
+  notify: Restart nginx

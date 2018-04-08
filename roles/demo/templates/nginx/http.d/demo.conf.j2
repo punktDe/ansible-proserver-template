@@ -1,0 +1,73 @@
+geo $demo_network_restrictions {
+    default "Restricted Access";{{ '\n    ' }}
+    {%- for interface in ansible_interfaces -%}
+        {%- set interface = vars['ansible_%s' % interface] -%}
+        {%- for ip in interface.ipv4 -%}
+            {{ ip.address }}/32 off;{{ '\n    ' }}
+        {%- endfor -%}
+        {%- for ip in interface.ipv6 -%}
+            {{ ip.address|regex_replace('%[a-z]+[\d]+$', '') }}/128 off;{{ '\n    ' }}
+        {%- endfor -%}
+    {%- endfor -%}
+    {%- for subnet in privileged_subnets.values()|sum(start=[]) -%}
+        {{ subnet }} off;{{ '\n' if loop.last else '\n    ' }}
+    {%- endfor -%}
+}
+
+server {
+    {% if dehydrated|cert_exists(demo.domain) %}
+    listen 0.0.0.0:443 ssl http2;
+    listen [::]:443 ssl http2;
+    {% else %}
+    listen 0.0.0.0:80;
+    listen [::]:80;
+    {% endif %}
+
+    server_name {{ demo.domain }};
+
+    {% if demo.basic_auth -%}
+    ############################################################################
+    # Basic Authentication
+    ############################################################################
+    auth_basic $demo_network_restrictions;
+    auth_basic_user_file {{ nginx.prefix.config }}/demo.htpasswd;
+    {% endif %}
+
+    ############################################################################
+    # General
+    ############################################################################
+    root {{ demo.prefix.current_release }};
+    server_tokens off;
+    index index.html index.php;
+    charset utf-8;
+    client_max_body_size 100M;
+
+    ############################################################################
+    # Default location
+    ############################################################################
+    location / {
+        try_files $uri $uri/ /index.php$is_args$args;
+    }
+
+    ############################################################################
+    # Named locations, interpreters
+    ############################################################################
+    location ~ \.php$ {
+        try_files $uri =404;
+        include {{ nginx.prefix.config }}/fastcgi_params;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param X-Real-IP $remote_addr;
+        fastcgi_param X-Forwarded-For $proxy_add_x_forwarded_for;
+        fastcgi_pass unix:/var/run/php-fpm/php-fpm.socket;
+    }
+
+    {% if dehydrated|cert_exists(demo.domain) %}
+    ############################################################################
+    # HTTPS
+    ############################################################################
+    ssl_certificate {{ dehydrated|cert_fullchain(demo.domain) }};
+    ssl_certificate_key {{ dehydrated|cert_privkey(demo.domain) }};
+    include {{ nginx.prefix.config }}/https_params.conf;
+    {% endif %}
+}

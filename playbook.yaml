@@ -30,6 +30,12 @@
 ################################################################################
 # Operating system services                                                    #
 ################################################################################
+- name: Message of the Day
+  hosts: motd
+  become: yes
+  roles:
+    - motd
+
 - name: Mail
   hosts: mail
   become: yes
@@ -44,6 +50,12 @@
   become: yes
   roles:
     - redis
+
+- name: PostgreSQL
+  hosts: postgresql
+  become: yes
+  roles:
+    - postgresql
 
 - name: MariaDB
   hosts: mariadb

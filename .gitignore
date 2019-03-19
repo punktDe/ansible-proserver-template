@@ -2,3 +2,4 @@
 .idea
 /*.retry
 /.vagrant
+/.fact_cache

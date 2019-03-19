@@ -10,12 +10,20 @@ meta-test:
 ###
 # Groups
 ###
+motd:
+'motd:children':
+  - meta
+
 mail:
 'mail:children':
   - meta
 
 redis:
 'redis:children':
+  - meta
+
+postgresql:
+'postgresql:children':
   - meta
 
 mariadb:

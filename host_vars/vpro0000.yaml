@@ -1,33 +1,69 @@
 ---
+# Note: you should protect secrets (passwords, keys, tokens)! Ansible offers a variety of secret providers, e.g. Vault:
+# https://docs.ansible.com/ansible/latest/user_guide/vault.html
 mail:
   aliases:
+    # Emails with info about system status, security checks and cron issues will go to theses addresses.
     root: noreply@example.com
     proserver: noreply@example.com
-    vpro0000: noreply@example.com
+    "{{ ansible_hostname }}": noreply@example.com
 mailhog:
   domain: mailhog.vpro0000.proserver.punkt.de
   basic_auth:
     username: passsword
+postgresql:
+  databases:
+    demo:
+      name: example
+      owner: ~demo
+  users:
+    demo:
+      username: example
+      password: example
 mariadb:
   databases:
     demo:
-      name: demo
+      name: example
   users:
     demo:
-      username: demo
-      password: demo
+      username: example
+      password: example
       hosts:
         demo: localhost
       privileges:
-        demo: "demo.*:all"
+        demo: "example.*:all"
 elasticsearch:
   elasticsearch.yml:
-    cluster.name: proserver-demo
+    cluster:
+      name: proserver-demo
 dehydrated:
+  # Dehydrated will generate X.509 certificates through Let's Encrypt.
+  # To make this work you'll need to provide a valid domain and update the DNS to point to the corresponding proServer.
+  # The certificate will automatically be issued and updated, you only need to use it in your nginx configuration
+  # (see roles/demo/templates/nginx/http.d/demo.conf.j2 for example).
   domains:
     #Common_Name: ['Subject', 'Alternative', 'Names']
     #vpro0000.proserver.punkt.de: []
+oauth2_proxy:
+  # Sign in page branding is added in group_vars/all.yaml.
+  config:
+    # The OAuth2 proxy supports login with Google, GitHub, GitLab (self-hosted and GitLab.com) and more.
+    # You can create as many OAuth2 proxy instances as you wish and protect your own applications with it.
+    # roles/mailhog/templates/nginx/http.d/mailhog.conf.j2 can serve as an example.
+    # This is an example configuration for GitLab. You can add any OAuth2 proxy config option here, refer to
+    # https://github.com/bitly/oauth2_proxy#oauth-provider-configuration for a full documentation.
+    mailhog:
+      # Make sure the port is not already in use!
+      http_address: "[::1]:4188"
+      provider: gitlab
+      scope: read_user
+      email_domains:
+        - example.com
+      login_url: https://gitlab.com/oauth/authorize
+      redeem_url: https://gitlab.com/oauth/token
+      validate_url: https://gitlab.com/api/v4/user
+      client_id: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      client_secret: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      cookie_secret: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 demo:
   domain: vpro0000.proserver.punkt.de
-  basic_auth:
-    username: passsword

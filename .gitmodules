@@ -22,6 +22,15 @@
 [submodule "roles/php"]
 	path = roles/php
 	url = https://github.com/punktDe/proserver-ansible-php.git
-[submodule "roles/punktde_vars"]
-	path = roles/punktde_vars
-	url = git@gitlab.pluspunkthosting.de:awx/punktde_vars.git
+[submodule "roles/oauth2_proxy"]
+	path = roles/oauth2_proxy
+	url = https://github.com/punktDe/proserver-ansible-oauth2-proxy.git
+[submodule "roles/supervisord"]
+	path = roles/supervisord
+	url = https://github.com/punktDe/proserver-ansible-supervisord.git
+[submodule "roles/postgresql"]
+	path = roles/postgresql
+	url = https://github.com/punktDe/proserver-ansible-postgresql.git
+[submodule "roles/motd"]
+	path = roles/motd
+	url = https://github.com/punktDe/proserver-ansible-motd.git

@@ -1,8 +1,17 @@
 ---
 #supported_ansible_version:
 #  major: 2
-#  minor: 4
+#  minor: 7
 #  revision: "*"
-ansible_python_interpreter: /usr/local/bin/python2
-dehydrated:
-  ca: https://acme-v01.api.letsencrypt.org/directory
+ansible_python_interpreter: /usr/local/bin/python3
+motd:
+  project: Update motd.project in group_vars/all.yaml!
+oauth2_proxy:
+  # This will add branding to all your OAuth2 proxy login pages.
+  # You should adapt this to your company's brand.
+  branding:
+    sign_in_header: >
+      <h2>Company Logo</h2>
+      <sub>(Update oauth2_proxy.branding in group_vars/all.yaml!)</sub>
+    footer: >
+      <a href="https://example.com">example.com</a> OAuth2 Proxy v{% raw %}{{.Version}}{% endraw %}

@@ -3,7 +3,7 @@
 ###
 meta:
   - proserver-dev
-meta-test:
+meta_test:
   - proserver-dev
 
 

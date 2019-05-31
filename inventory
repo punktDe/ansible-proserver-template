@@ -14,7 +14,7 @@ testing
 staging
 production
 
-[meta-test]
+[meta_test]
 testing
 
 
@@ -47,7 +47,7 @@ meta
 
 [mailhog]
 [mailhog:children]
-meta-test
+meta_test
 
 [demo]
 [demo:children]

@@ -1,54 +1,51 @@
 ###
-# Host definitions
+# Hosts
 ###
-testing ansible_ssh_host=vpro0000.proserver.punkt.de ansible_ssh_user=vpro0000 environment_name=testing
-staging ansible_ssh_host=vpro0000.proserver.punkt.de ansible_ssh_user=vpro0000 environment_name=staging
-production ansible_ssh_host=vpro0000.proserver.punkt.de ansible_ssh_user=vpro0000 environment_name=production
+testing    ansible_host=vpro0000.proserver.punkt.de ansible_user=vpro0000 environment_name=testing
+staging    ansible_host=vpro0000.proserver.punkt.de ansible_user=vpro0000 environment_name=staging
+production ansible_host=vpro0000.proserver.punkt.de ansible_user=vpro0000 environment_name=production
 
 
 ###
-# Meta groups
+# Application groups
 ###
-[meta]
+[demo]
 testing
 staging
 production
 
-[meta_test]
+[demo_tests]
 testing
+staging
 
 
 ###
-# Groups
+# Component groups
 ###
 [motd]
 [motd:children]
-meta
+demo
 
 [mail]
 [mail:children]
-meta
-
-[redis]
-[redis:children]
-meta
-
-[postgresql]
-[postgresql:children]
-meta
-
-[mariadb]
-[mariadb:children]
-meta
-
-[elasticsearch]
-[elasticsearch:children]
-meta
+demo
 
 [mailhog]
 [mailhog:children]
-meta_test
+demo_tests
 
-[demo]
-[demo:children]
-meta
+[redis]
+[redis:children]
+demo
+
+[postgresql]
+[postgresql:children]
+demo
+
+[mariadb]
+[mariadb:children]
+demo
+
+[elasticsearch]
+[elasticsearch:children]
+demo

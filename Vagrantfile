@@ -20,6 +20,12 @@ Vagrant.configure('2') do |vagrant|
     ansible.limit = 'all'
     ansible.playbook = File.join(__dir__, 'playbook.yaml')
     ansible.groups = YAML.load_file(File.join(__dir__, 'Vagrantinventory.yaml'))
-    ansible.raw_arguments = ['--ssh-extra-args="-o StrictHostKeyChecking=no"']
+    ansible.raw_arguments = [
+      '--ssh-extra-args="-o ControlMaster=no"',
+      '--ssh-extra-args="-o StrictHostKeyChecking=no"',
+      '--sftp-extra-args="-o StrictHostKeyChecking=no"',
+      '--scp-extra-args="-o StrictHostKeyChecking=no"',
+      #'--start-at-task=debug',
+    ]
   end
 end

@@ -26,6 +26,19 @@ mailhog:
   # The MailHog webinterface will be reachable via this domain:
   domain: mailhog.proserver-dev.local
 
+mariadb:
+  databases:
+    neos:
+      name: neos-dev
+  users:
+    neos:
+      username: neos-dev
+      password: neos-dev
+      hosts:
+        neos: localhost
+      privileges:
+        neos: "neos-dev.*:all"
+
 postgresql:
   # The dictionary keys ("neos") will not be used by the role (except for the owner field, read the comment below).
   # This way you can use Ansible's variable precedence to define a default and override it if needed. For example,
@@ -39,19 +52,6 @@ postgresql:
     neos:
       username: neos-dev
       password: neos-dev
-
-mariadb:
-  databases:
-    neos:
-      name: neos-dev
-  users:
-    neos:
-      username: neos-dev
-      password: neos-dev
-      hosts:
-        neos: localhost
-      privileges:
-        neos: "neos-dev.*:all"
 
 elasticsearch:
   elasticsearch.yml:

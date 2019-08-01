@@ -10,7 +10,7 @@ dehydrated:
   # To make this work you'll need to provide a valid domain and update the DNS to point to the corresponding proServer.
   # The certificate will automatically be issued and updated, you only need to use it in your nginx configuration
   # (see roles/neos/templates/nginx/http.d/neos.conf.j2 for example).
-  domains:
+  #domains:
     #Common_Name: ['Subject', 'Alternative', 'Names']
     #vpro0000.proserver.punkt.de: []
 

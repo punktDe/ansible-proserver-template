@@ -1,0 +1,13 @@
+---
+Neos:
+  Imagine:
+    driver: Gd
+  Flow:
+    persistence:
+      backendOptions:
+        driver: "%env:DB_DRIVER%"
+        dbname: "%env:DB_NAME%"
+        user: "%env:DB_USER%"
+        password: "%env:DB_PASS%"
+        host: "%env:DB_HOST%"
+        charset: "%env:DB_CHARSET%"

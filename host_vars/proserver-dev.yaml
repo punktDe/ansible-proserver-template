@@ -8,30 +8,30 @@ mailhog:
   # The MailHog webinterface will be reachable via this domain:
   domain: mailhog.proserver-dev.local
 postgresql:
-  # The dictionary keys ("demo") will not be used by the role (except for the owner field, read the comment below).
+  # The dictionary keys ("neos") will not be used by the role (except for the owner field, read the comment below).
   # This way you can use Ansible's variable precedence to define a default and override it if needed. For example,
   # you could define a default database name and password for your app in group vars and override it in host vars.
   databases:
-    demo:
-      name: example
-      # "~demo" will be translated to "example" because postgresql.users.demo.username is "example".
-      owner: ~demo
+    neos:
+      name: neos-dev
+      # "~neos" will be translated to "neos-dev" because postgresql.users.neos.username is "neos-dev".
+      owner: ~neos
   users:
-    demo:
-      username: example
-      password: example
+    neos:
+      username: neos-dev
+      password: neos-dev
 mariadb:
   databases:
-    demo:
-      name: example
+    neos:
+      name: neos-dev
   users:
-    demo:
-      username: example
-      password: example
+    neos:
+      username: neos-dev
+      password: neos-dev
       hosts:
-        demo: localhost
+        neos: localhost
       privileges:
-        demo: "example.*:all"
+        neos: "neos-dev.*:all"
 elasticsearch:
   elasticsearch.yml:
     # The Elasticsearch role comes with a working set of defaults, see roles/elasticsearch/defaults/main.yaml.
@@ -52,6 +52,6 @@ oauth2_proxy:
   config:
     # Here we could configure access control for MailHog but since this is a local virtual machine we just disable it.
     mailhog: ~
-demo:
-  # The demo app (hello world message and phpinfo()) will be available under this domain.
-  domain: demo.proserver-dev.local
+neos:
+  # The Neos app (hello world message and phpinfo()) will be available under this domain.
+  domain: neos.proserver-dev.local

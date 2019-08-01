@@ -1,9 +1,9 @@
 ###
 # Application groups
 ###
-demo:
+neos:
   - proserver-dev
-demo_tests:
+neos_tests:
   - proserver-dev
 
 
@@ -12,28 +12,28 @@ demo_tests:
 ###
 motd:
 motd:children:
-  - demo
+  - neos
 
 mail:
 mail:children:
-  - demo
+  - neos
 
 mailhog:
 mailhog:children:
-  - demo_tests
+  - neos_tests
 
 redis:
 redis:children:
-  - demo
+  - neos
 
 postgresql:
 postgresql:children:
-  - demo
+  - neos
 
 mariadb:
 mariadb:children:
-  - demo
+  - neos
 
 elasticsearch:
 elasticsearch:children:
-  - demo
+  - neos

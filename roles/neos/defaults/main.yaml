@@ -1,0 +1,4 @@
+---
+neos:
+  prefix:
+    current_release: /var/www/neos

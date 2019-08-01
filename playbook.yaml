@@ -50,8 +50,8 @@
   roles:
     - mailhog
 
-- name: Demo
-  hosts: demo
+- name: Neos
+  hosts: neos
   become: yes
   roles:
-    - demo
+    - neos

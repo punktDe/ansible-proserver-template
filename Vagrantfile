@@ -1,3 +1,10 @@
+# -*- mode: ruby -*-
+# vi: ft=ruby :
+
+ENV['COT_TTY'] = 'false'
+ENV['COT_INTERACTIVE'] = 'false'
+ENV['COT_ARGS'] = '-e ANSIBLE_FORCE_COLOR=true -v ' + ENV['HOME'] + '/.vagrant.d:' + ENV['HOME'] + '/.vagrant.d:z'
+
 require 'yaml'
 
 Vagrant.configure('2') do |vagrant|
@@ -8,6 +15,7 @@ Vagrant.configure('2') do |vagrant|
   vagrant.vm.network 'private_network', ip: '172.17.78.40'
 
   vagrant.ssh.forward_agent = true
+  #vagrant.ssh.insert_key = false
 
   vagrant.vm.provider 'virtualbox' do |virtualbox|
     virtualbox.name = 'proserver-dev'

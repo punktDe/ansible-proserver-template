@@ -1,14 +1,43 @@
-# [proserver-ansible-example](https://github.com/punktDe/proserver-ansible-example)
+# proServer Ansible Template
 
-This playbook demonstrates the use of our [open source Ansible roles for the proServer](https://github.com/punktDe?q=proserver-ansible).
+This repository serves as a template for your proServer ansible configuration. It uses our [open source Ansible roles](https://github.com/punktDe?q=proserver-ansible) for the [punkt.de proServer](https://infrastructure.punkt.de/de/produkte/proserver.html) as submodules to configure everything your PHP projects needs, like nginx with letsencrypt, MariaDB or Postgres, redis, elasticsearch and many services more.
 
-## Requirements
 
-- Ansible
+## Set up your proServer
+
+### 1. Install ansible
+
+Set up ansible on your local mashine. Ansible 2.8 is required. See the [Ansible Installation Guide](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) for detailed instructions for your operating system.
+
+### 2. Clone this repository
+
+Clone this repository and init its submodules with `git submodule update --init`.
+
+### 3. Configure your project
+
+Basically there are two files, that define the services and configuration for your proServer instance:
+
+**host_vars**
+
+The host_vars file contains the configuration parameters for your host. We already provide some template files tailored to different applications and environments within the folder `host_vars_templates`. Copy the files you want to use to the `host_vars` folder. Then replace at least the occurences of `vpro0000` with your proServers number.
+
+**inventory.ini**
+
+The inventory.ini assignes the hosts to ansible groups. These groups define the roles and services a provisioned server instance provides.
+
+### Run ansible
+
+	ansible-playbook --ssh-extra-args '-o ProxyJump=jumping@ssh-jumphost.karlsruhe.punkt.de' --limit staging playbook.yaml
+
+
+## Development with Vagrant and VirtualBox
+
+### Additional Requirements
+
 - Vagrant
 - VirtualBox
 
-## Development with Vagrant and VirtualBox
+### Set up your development environment
 
 **1)** Clone this repository and it's submodules
 
@@ -34,9 +63,6 @@ echo "172.17.78.40 neos.proserver-dev.local mailhog.proserver-dev.local" | sudo 
 
 **4)** Go to [http://neos.proserver-dev.local](http://neos.proserver-dev.local)
 
-## Going live
-
-Configure your proServer(s) in `inventory` and use `ansible-playbook` as usual.
 
 ## Helpful links
 

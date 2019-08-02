@@ -2,9 +2,14 @@
 # Application groups
 ###
 neos:
-  - proserver-dev
+  - development
 neos_tests:
-  - proserver-dev
+  - development
+
+typo3:
+  - development
+typo3_tests:
+  - development
 
 
 ###
@@ -13,10 +18,12 @@ neos_tests:
 motd:
 motd:children:
   - neos
+  - typo3
 
 mail:
 mail:children:
   - neos
+  - typo3
 
 mailhog:
 mailhog:children:
@@ -25,15 +32,19 @@ mailhog:children:
 redis:
 redis:children:
   - neos
+  - typo3
 
 postgresql:
 postgresql:children:
   - neos
+  - typo3
 
 mariadb:
 mariadb:children:
   - neos
+  - typo3
 
 elasticsearch:
 elasticsearch:children:
   - neos
+  - typo3

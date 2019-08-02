@@ -55,7 +55,7 @@ vagrant up
 **3)** Update `/etc/hosts` to include virtual host names used in your playbook
 
 You can also use your own domain if you like.
-Just update `neos.domain` and `mailhog.domain` in `host_vars/proserver-dev.yaml`.
+Just update `neos.domain` and `mailhog.domain` in `host_vars/development.yaml`.
 
 ```sh
 echo "172.17.78.40 neos.proserver-dev.local mailhog.proserver-dev.local" | sudo tee -a /etc/hosts

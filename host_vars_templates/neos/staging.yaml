@@ -14,22 +14,9 @@ dehydrated:
     #Common_Name: ['Subject', 'Alternative', 'Names']
     #vpro0000.proserver.punkt.de: []
 
-mail:
-  aliases:
-    # Emails with info about system status, security checks and cron issues will go to theses addresses.
-    root: noreply@example.com
-    proserver: noreply@example.com
-    "{{ ansible_hostname }}": noreply@example.com
-
-postgresql:
-  databases:
-    neos:
-      name: neos-stg
-      owner: ~neos
-  users:
-    neos:
-      username: neos-stg
-      password: neos-stg
+nginx:
+  moved_permanently: []
+    #http://vpro0000.proserver.punkt.de: https://vpro0000.proserver.punkt.de
 
 mariadb:
   databases:
@@ -43,6 +30,16 @@ mariadb:
         neos: localhost
       privileges:
         neos: "neos-stg.*:all"
+
+postgresql:
+  databases:
+    neos:
+      name: neos-stg
+      owner: ~neos
+  users:
+    neos:
+      username: neos-stg
+      password: neos-stg
 
 elasticsearch:
   elasticsearch.yml:
@@ -70,6 +67,13 @@ oauth2_proxy:
       client_id: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       client_secret: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       cookie_secret: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+mail:
+  aliases:
+    # Emails with info about system status, security checks and cron issues will go to theses addresses.
+    root: noreply@example.com
+    proserver: noreply@example.com
+    "{{ ansible_hostname }}": noreply@example.com
 
 mailhog:
   domain: mailhog.vpro0000.proserver.punkt.de

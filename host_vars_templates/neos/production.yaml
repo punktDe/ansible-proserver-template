@@ -1,12 +1,6 @@
 ---
 # Note: you should protect secrets (passwords, keys, tokens)! Ansible offers a variety of secret providers, e.g. Vault:
 # https://docs.ansible.com/ansible/latest/user_guide/vault.html
-mail:
-  aliases:
-    # Emails with info about system status, security checks and cron issues will go to theses addresses.
-    root: noreply@example.com
-    proserver: noreply@example.com
-    "{{ ansible_hostname }}": noreply@example.com
 
 neos:
   domain: vpro0000.proserver.punkt.de
@@ -16,9 +10,13 @@ dehydrated:
   # To make this work you'll need to provide a valid domain and update the DNS to point to the corresponding proServer.
   # The certificate will automatically be issued and updated, you only need to use it in your nginx configuration
   # (see roles/neos/templates/nginx/http.d/neos.conf.j2 for example).
-  #domains:
+  domains: []
     #Common_Name: ['Subject', 'Alternative', 'Names']
     #vpro0000.proserver.punkt.de: []
+
+nginx:
+  moved_permanently: []
+    #http://vpro0000.proserver.punkt.de: https://vpro0000.proserver.punkt.de
 
 mariadb:
   databases:
@@ -47,3 +45,10 @@ elasticsearch:
   elasticsearch.yml:
     cluster:
       name: proserver-neos-prd
+
+mail:
+  aliases:
+    # Emails with info about system status, security checks and cron issues will go to theses addresses.
+    root: noreply@example.com
+    proserver: noreply@example.com
+    "{{ ansible_hostname }}": noreply@example.com

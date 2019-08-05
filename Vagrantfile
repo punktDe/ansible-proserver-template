@@ -3,7 +3,7 @@
 
 ENV['COT_TTY'] = 'false'
 ENV['COT_INTERACTIVE'] = 'false'
-ENV['COT_ARGS'] = '-e ANSIBLE_FORCE_COLOR=true -v ' + ENV['HOME'] + '/.vagrant.d:' + ENV['HOME'] + '/.vagrant.d:z'
+ENV['COT_VOLUME_VAGRANT_D'] = ENV['HOME'] + '/.vagrant.d:' + ENV['HOME'] + '/.vagrant.d:z'
 
 require 'yaml'
 

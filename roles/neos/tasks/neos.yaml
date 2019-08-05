@@ -1,8 +1,8 @@
 ---
 - name: Template .env file
   template:
-    src: neos.env
-    dest: /usr/local/etc/neos.env
+    src: neos.env.j2
+    dest: "{{ neos.prefix.config }}/neos.env"
     owner: proserver
     group: proserver
     mode: 0400
@@ -15,5 +15,6 @@
     group: proserver
   with_items:
     - /var/www
+    - "{{ neos.prefix.var }}"
     - "{{ neos.prefix.current_release }}"
   register: create_webspace_directory

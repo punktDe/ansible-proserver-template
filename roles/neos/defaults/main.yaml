@@ -1,4 +1,9 @@
 ---
 neos:
   prefix:
-    current_release: /var/www/neos
+    config: /usr/local/etc
+    var: /var/www/neos
+    # Deployer-style release path
+    current_release: /var/www/neos/current
+    # Surf-style release path
+    #current_release: /var/www/neos/releases/current

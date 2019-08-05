@@ -4,19 +4,20 @@
 
 neos:
   domain: vpro0000.proserver.punkt.de
+  default_context: Production
 
 dehydrated:
   # Dehydrated will generate X.509 certificates through Let's Encrypt.
   # To make this work you'll need to provide a valid domain and update the DNS to point to the corresponding proServer.
   # The certificate will automatically be issued and updated, you only need to use it in your nginx configuration
   # (see roles/neos/templates/nginx/http.d/neos.conf.j2 for example).
-  #domains:
+  domains:
     #Common_Name: ['Subject', 'Alternative', 'Names']
-    #vpro0000.proserver.punkt.de: []
+    vpro0000.proserver.punkt.de: []
 
 nginx:
-  moved_permanently: []
-    #http://vpro0000.proserver.punkt.de: https://vpro0000.proserver.punkt.de
+  moved_permanently:
+    http://vpro0000.proserver.punkt.de: https://vpro0000.proserver.punkt.de
 
 mariadb:
   databases:

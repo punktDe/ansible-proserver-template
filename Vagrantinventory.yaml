@@ -3,12 +3,12 @@
 ###
 neos:
   - development
-neos_tests:
+neos_test:
   - development
 
 typo3:
   - development
-typo3_tests:
+typo3_test:
   - development
 
 
@@ -27,7 +27,7 @@ mail:children:
 
 mailhog:
 mailhog:children:
-  - neos_tests
+  - neos_test
 
 redis:
 redis:children:

@@ -2,8 +2,12 @@
 environment_name: development
 
 neos:
-  # The Neos app (hello world message and phpinfo()) will be available under this domain.
+  prefix:
+    # Override path to latest release, as we don't have multiple releases in the local dev environment
+    # (see roles/neos/defaults/main.yaml for production values).
+    current_release: /var/www/neos
   domain: neos.proserver-dev.local
+  default_context: Development
 
 nginx:
   # The amount of bits used by default (4096) takes a very long time to generate (happens during the initial
@@ -22,7 +26,7 @@ mail:
   enable_mta: no
 
 mailhog:
-  # We want to send emails to MailHog (configure your application to send emails to localhost:1025).
+  # We want to send emails to MailHog (configure your application to send emails to 127.0.0.1:1025).
   # The MailHog webinterface will be reachable via this domain:
   domain: mailhog.proserver-dev.local
 
@@ -39,19 +43,19 @@ mariadb:
       privileges:
         neos: "neos-dev.*:all"
 
-postgresql:
-  # The dictionary keys ("neos") will not be used by the role (except for the owner field, read the comment below).
-  # This way you can use Ansible's variable precedence to define a default and override it if needed. For example,
-  # you could define a default database name and password for your app in group vars and override it in host vars.
-  databases:
-    neos:
-      name: neos-dev
-      # "~neos" will be translated to "neos-dev" because postgresql.users.neos.username is "neos-dev".
-      owner: ~neos
-  users:
-    neos:
-      username: neos-dev
-      password: neos-dev
+#postgresql:
+#  # The dictionary keys ("neos") will not be used by the role (except for the owner field, read the comment below).
+#  # This way you can use Ansible's variable precedence to define a default and override it if needed. For example,
+#  # you could define a default database name and password for your app in group vars and override it in host vars.
+#  databases:
+#    neos:
+#      name: neos-dev
+#      # "~neos" will be translated to "neos-dev" because postgresql.users.neos.username is "neos-dev".
+#      owner: ~neos
+#  users:
+#    neos:
+#      username: neos-dev
+#      password: neos-dev
 
 elasticsearch:
   elasticsearch.yml:

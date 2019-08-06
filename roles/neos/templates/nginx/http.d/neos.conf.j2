@@ -1,0 +1,49 @@
+server {
+    {% if dehydrated|cert_exists(neos.domain) -%}
+    listen 0.0.0.0:443 ssl http2;
+    listen [::]:443 ssl http2;
+    {% if ansible_local.proserver.routing.with_gate64 -%}
+    listen [::1]:57 ssl http2 proxy_protocol;
+    real_ip_header $real_ip_header;
+    set_real_ip_from {{ ansible_local.proserver.routing.gate64_ip_address }};
+    {%- endif %}
+    {% else %}
+    listen 0.0.0.0:80;
+    listen [::]:80;
+    {% if ansible_local.proserver.routing.with_gate64 -%}
+    listen [::1]:87 proxy_protocol;
+    real_ip_header $real_ip_header;
+    set_real_ip_from {{ ansible_local.proserver.routing.gate64_ip_address }};
+    {%- endif %}
+    {% endif %}
+
+    server_name {{ neos.domain }};
+
+    root {{ neos.prefix.current_release }}/Web;
+    index index.php;
+    charset utf-8;
+
+    location / {
+        try_files $uri $uri/ /index.php$is_args$args;
+    }
+
+    location ~ \.php$ {
+        try_files $uri =404;
+        include {{ nginx.prefix.config }}/fastcgi_params;
+        fastcgi_index index.php;
+        fastcgi_split_path_info ^(.+\.php)(.*)$;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param FLOW_REWRITEURLS 1;
+        fastcgi_param X-Real-IP $remote_addr;
+        fastcgi_param X-Forwarded-For $remote_addr;
+        fastcgi_param X-Request-ID $ensure_request_id;
+        fastcgi_pass unix:/var/run/php-fpm/php-fpm.socket;
+    }
+
+    {% if dehydrated|cert_exists(neos.domain) %}
+    ssl_certificate {{ dehydrated|cert_fullchain(neos.domain) }};
+    ssl_certificate_key {{ dehydrated|cert_privkey(neos.domain) }};
+    include {{ nginx.prefix.config }}/https_params.conf;
+    {% endif %}
+}

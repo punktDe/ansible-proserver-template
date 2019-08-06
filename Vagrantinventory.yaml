@@ -1,43 +1,50 @@
 ###
-# Meta groups
+# Application groups
 ###
-meta:
-  - proserver-dev
-meta-test:
-  - proserver-dev
+neos:
+  - development
+neos_test:
+  - development
+
+typo3:
+  - development
+typo3_test:
+  - development
 
 
 ###
-# Groups
+# Component groups
 ###
 motd:
-'motd:children':
-  - meta
+motd:children:
+  - neos
+  - typo3
 
 mail:
-'mail:children':
-  - meta
-
-redis:
-'redis:children':
-  - meta
-
-postgresql:
-'postgresql:children':
-  - meta
-
-mariadb:
-'mariadb:children':
-  - meta
-
-elasticsearch:
-'elasticsearch:children':
-  - meta
+mail:children:
+  - neos
+  - typo3
 
 mailhog:
-'mailhog:children':
-  - meta
+mailhog:children:
+  - neos_test
 
-demo:
-'demo:children':
-  - meta
+redis:
+redis:children:
+  - neos
+  - typo3
+
+postgresql:
+postgresql:children:
+  - neos
+  - typo3
+
+mariadb:
+mariadb:children:
+  - neos
+  - typo3
+
+elasticsearch:
+elasticsearch:children:
+  - neos
+  - typo3

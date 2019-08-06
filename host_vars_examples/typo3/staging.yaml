@@ -1,49 +1,52 @@
 ---
 # Note: you should protect secrets (passwords, keys, tokens)! Ansible offers a variety of secret providers, e.g. Vault:
 # https://docs.ansible.com/ansible/latest/user_guide/vault.html
-mail:
-  aliases:
-    # Emails with info about system status, security checks and cron issues will go to theses addresses.
-    root: noreply@example.com
-    proserver: noreply@example.com
-    "{{ ansible_hostname }}": noreply@example.com
-mailhog:
-  domain: mailhog.vpro0000.proserver.punkt.de
-  basic_auth:
-    username: passsword
-postgresql:
-  databases:
-    demo:
-      name: example
-      owner: ~demo
-  users:
-    demo:
-      username: example
-      password: example
-mariadb:
-  databases:
-    demo:
-      name: example
-  users:
-    demo:
-      username: example
-      password: example
-      hosts:
-        demo: localhost
-      privileges:
-        demo: "example.*:all"
-elasticsearch:
-  elasticsearch.yml:
-    cluster:
-      name: proserver-demo
+
+typo3:
+  domain: vpro0000.proserver.punkt.de
+  context: Production
+
 dehydrated:
   # Dehydrated will generate X.509 certificates through Let's Encrypt.
   # To make this work you'll need to provide a valid domain and update the DNS to point to the corresponding proServer.
   # The certificate will automatically be issued and updated, you only need to use it in your nginx configuration
-  # (see roles/demo/templates/nginx/http.d/demo.conf.j2 for example).
+  # (see roles/typo3/templates/nginx/http.d/typo3.conf.j2 for example).
   domains:
     #Common_Name: ['Subject', 'Alternative', 'Names']
-    #vpro0000.proserver.punkt.de: []
+    vpro0000.proserver.punkt.de: []
+
+nginx:
+  moved_permanently:
+    http://vpro0000.proserver.punkt.de: https://vpro0000.proserver.punkt.de
+
+mariadb:
+  databases:
+    typo3:
+      name: typo3-stg
+  users:
+    typo3:
+      username: typo3-stg
+      password: typo3-stg
+      hosts:
+        typo3: localhost
+      privileges:
+        typo3: "typo3-stg.*:all"
+
+postgresql:
+  databases:
+    typo3:
+      name: typo3-stg
+      owner: ~typo3
+  users:
+    typo3:
+      username: typo3-stg
+      password: typo3-stg
+
+elasticsearch:
+  elasticsearch.yml:
+    cluster:
+      name: proserver-typo3-stg
+
 oauth2_proxy:
   # Sign in page branding is added in group_vars/all.yaml.
   config:
@@ -65,5 +68,15 @@ oauth2_proxy:
       client_id: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       client_secret: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       cookie_secret: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-demo:
-  domain: vpro0000.proserver.punkt.de
+
+mail:
+  aliases:
+    # Emails with info about system status, security checks and cron issues will go to theses addresses.
+    root: noreply@example.com
+    proserver: noreply@example.com
+    "{{ ansible_hostname }}": noreply@example.com
+
+mailhog:
+  domain: mailhog.vpro0000.proserver.punkt.de
+  basic_auth:
+    username: passsword

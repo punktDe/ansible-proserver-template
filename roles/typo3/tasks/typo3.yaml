@@ -1,0 +1,19 @@
+---
+- name: Template .env file
+  template:
+    src: typo3.env.j2
+    dest: "{{ typo3.prefix.config }}/typo3.env"
+    owner: proserver
+    group: proserver
+    mode: 0400
+
+- name: Create webspace directory
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: proserver
+    group: proserver
+  with_items:
+    - /var/www
+    - "{{ typo3.prefix.var }}"
+  register: create_webspace_directory

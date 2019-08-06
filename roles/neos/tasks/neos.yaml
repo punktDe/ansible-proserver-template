@@ -1,0 +1,19 @@
+---
+- name: Template .env file
+  template:
+    src: neos.env.j2
+    dest: "{{ neos.prefix.config }}/neos.env"
+    owner: proserver
+    group: proserver
+    mode: 0400
+
+- name: Create webspace directory
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: proserver
+    group: proserver
+  with_items:
+    - /var/www
+    - "{{ neos.prefix.var }}"
+  register: create_webspace_directory

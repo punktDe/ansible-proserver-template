@@ -1,34 +1,6 @@
 ---
 ################################################################################
-# Ansible                                                                      #
-################################################################################
-#- name: Ansible
-#  connection: local
-#  hosts: all
-#  become: no
-#  gather_facts: no
-#  any_errors_fatal: yes
-#  tasks:
-#    - name: >
-#        Ansible {{ i.major }}.{{ i.minor }}.{{ i.revision }} ==
-#        Ansible {{ s.major }}.{{ s.minor }}.{{ s.revision }}
-#      fail:
-#        msg: Ansible version is unsupported
-#      failed_when: >
-#        (s.major != "*" and i.major != s.major) or
-#        (s.minor != "*" and i.minor != s.minor) or
-#        (s.revision != "*" and i.revision != s.revision)
-#      vars:
-#        i: "{{ ansible_version }}"
-#        s: "{{ supported_ansible_version }}"
-
-
-- name: Facts
-  hosts: all
-  become: yes
-
-################################################################################
-# Operating system services                                                    #
+# Operating system                                                             #
 ################################################################################
 - name: Message of the Day
   hosts: motd
@@ -70,7 +42,7 @@
     - elasticsearch
 
 ################################################################################
-# Frontend services                                                            #
+# Applications                                                                 #
 ################################################################################
 - name: MailHog
   hosts: mailhog
@@ -78,8 +50,14 @@
   roles:
     - mailhog
 
-- name: Demo
-  hosts: demo
+- name: Neos
+  hosts: neos
   become: yes
   roles:
-    - demo
+    - neos
+
+- name: TYPO3
+  hosts: typo3
+  become: yes
+  roles:
+    - typo3

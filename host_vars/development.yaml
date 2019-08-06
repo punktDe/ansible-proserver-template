@@ -9,6 +9,12 @@ neos:
   domain: neos.proserver-dev.local
   default_context: Development
 
+typo3:
+  prefix:
+    current_release: /var/www/typo3
+  domain: typo3.proserver-dev.local
+  context: Development
+
 nginx:
   # The amount of bits used by default (4096) takes a very long time to generate (happens during the initial
   # provisioning process), which is why we decrease the amount of dhparam bits in development mode.
@@ -34,6 +40,8 @@ mariadb:
   databases:
     neos:
       name: neos-dev
+    typo3:
+      name: typo3-dev
   users:
     neos:
       username: neos-dev
@@ -42,6 +50,13 @@ mariadb:
         neos: localhost
       privileges:
         neos: "neos-dev.*:all"
+    typo3:
+      username: typo3-dev
+      password: typo3-dev
+      hosts:
+        typo3: localhost
+      privileges:
+        typo3: "typo3-dev.*:all"
 
 #postgresql:
 #  # The dictionary keys ("neos") will not be used by the role (except for the owner field, read the comment below).
@@ -56,6 +71,9 @@ mariadb:
 #    neos:
 #      username: neos-dev
 #      password: neos-dev
+#    typo3:
+#      username: typo3-dev
+#      password: typo3-dev
 
 elasticsearch:
   elasticsearch.yml:

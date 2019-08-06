@@ -55,3 +55,9 @@
   become: yes
   roles:
     - neos
+
+- name: TYPO3
+  hosts: typo3
+  become: yes
+  roles:
+    - typo3

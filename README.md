@@ -61,7 +61,7 @@ source .envrc  # Hint: Install Direnv (direnv.net) to do this automatically in t
 
 Basically there are two files, that define the services and configuration for your proServer instance:
 
-**inventory.ini**
+[**inventory.ini**](inventory.ini)
 
 Your inventory contains a list of hosts (proServers) and the groups each host belongs to.
 The groups are later used by the playbook to determine which roles
@@ -70,10 +70,10 @@ The groups are later used by the playbook to determine which roles
 Replace at least any occurrence of `vpro0000` with your proServer ID(s) and
 uncomment `staging`/`production` within the application groups section.
 
-**host_vars/**
+[**host_vars/**](host_vars/)
 
-The `host_vars` directory contains a number of files, each file represents a host from your inventory.
-You can copy examples from the `host_vars_examples` directory.
+The [`host_vars`](host_vars/) directory contains a number of files, each file represents a host from your inventory.
+You can copy examples from the [`host_vars_examples`](host_vars_examples/) directory.
 `development.yaml` represents the development environment (Vagrant+VirtualBox).
 
 ```bash
@@ -117,7 +117,7 @@ You can also use your own domain if you like.
 Just update `neos.domain` and `mailhog.domain` in your host vars.
 
 ```bash
-echo "172.17.78.40 neos.proserver-dev.local mailhog.proserver-dev.local" | sudo tee -a /etc/hosts
+echo "172.17.78.40 neos.proserver-dev.local typo3.proserver-dev.local mailhog.proserver-dev.local" | sudo tee -a /etc/hosts
 ```
 
 **5)** Go to [http://neos.proserver-dev.local](http://neos.proserver-dev.local)
@@ -129,17 +129,16 @@ ansible-playbook --ssh-extra-args=-oProxyJump=jumping@ssh-jumphost.karlsruhe.pun
 ```
 
 Replace `--limit=staging` with `--limit=production` to provision the production environment.
-You can also remove the limit parameter to provision all environments from your `inventory.ini`.
+You can also remove the limit parameter to provision all environments from your [`inventory.ini`](inventory.ini).
 
 ## Neos configuration hints
 
-The `neos` role will render a file `/usr/local/etc/neos.env`, which will contain useful information about your environment
-(e.g. domain name, database type and credentials).
-You can use the [`helhum/dotenv-connector`](https://github.com/helhum/dotenv-connector) package to read the file
-and use any variable it contains in your Neos configuration.
+The `neos` role will template the file [`/usr/local/etc/neos.env`](roles/neos/templates/neos.env.j2), which contains useful information about your environment (e.g. domain name, database type and credentials).
+You can use the [`helhum/dotenv-connector`](https://github.com/helhum/dotenv-connector) package to read the file and use any variable it contains in your Neos configuration.
 
 ```bash
 composer require helhum/dotenv-connector
+composer config extra.helhum/dotenv-connector.env-file /usr/local/etc/neos.env
 ```
 
 ```yaml
@@ -155,6 +154,30 @@ Neos:
         host: "%env:DB_HOST%"
         charset: "%env:DB_CHARSET%"
 ```
+
+## TYPO3 configuration hints
+
+The `typo3` role will template the file [`/usr/local/etc/typo3.env`](roles/typo3/templates/typo3.env.j2), which contains useful information about your environment (e.g. domain name, database type and credentials).
+You can use the [`helhum/dotenv-connector`](https://github.com/helhum/dotenv-connector) package to read the file and use any variable it contains in your TYPO3 configuration.
+
+```bash
+composer require helhum/dotenv-connector
+composer config extra.helhum/dotenv-connector.env-file /usr/local/etc/typo3.env
+```
+
+```php
+# htdocs/typo3conf/AdditionalConfiguration.php
+$GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['dbname'] = getenv('DB_NAME');
+$GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['user'] = getenv('DB_USER');
+$GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['password'] = getenv('DB_PASS');
+$GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['host'] = strpos(getenv('DB_HOST'), ':') === false ? getenv('DB_HOST') : '[' . getenv('DB_HOST') . ']';
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['trustedHostsPattern'] = getenv('SITE_DOMAIN');
+```
+
+## Deployment
+
+[Deployer](https://deployer.org/) can be used to deploy Neos or TYPO3 to a proServer.
+[`deployer_examples/`](deployer_examples/) contains a set of Deployer configuration examples.
 
 ## Helpful links
 

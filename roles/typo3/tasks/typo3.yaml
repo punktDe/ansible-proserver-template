@@ -1,8 +1,8 @@
 ---
 - name: Template .env file
   template:
-    src: neos.env.j2
-    dest: "{{ neos.prefix.config }}/neos.env"
+    src: typo3.env.j2
+    dest: "{{ typo3.prefix.config }}/typo3.env"
     owner: proserver
     group: proserver
     mode: 0400
@@ -15,5 +15,5 @@
     group: proserver
   with_items:
     - /var/www
-    - "{{ neos.prefix.var }}"
+    - "{{ typo3.prefix.var }}"
   register: create_webspace_directory

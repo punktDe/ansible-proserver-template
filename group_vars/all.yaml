@@ -1,5 +1,4 @@
 ---
-ansible_python_interpreter: /usr/local/bin/python3
 motd:
   project: Update motd.project in group_vars/all.yaml!
 oauth2_proxy:

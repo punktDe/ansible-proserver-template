@@ -16,7 +16,7 @@ dehydrated:
     vpro0000.proserver.punkt.de: []
 
 nginx:
-  moved_permanently:
+  redirects:
     http://vpro0000.proserver.punkt.de: https://vpro0000.proserver.punkt.de
 
 mariadb:

@@ -49,11 +49,11 @@ git clone --recurse-submodules https://github.com/punktDe/proserver-ansible-temp
 cd proserver-ansible-template
 ```
 
-**2)** Install Ansible on your local machine. Ansible >=2.8 should work. See the [Ansible Installation Guide](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) for detailed instructions for your operating system. If you have Python 3 and venv installed, you can use this command:
+**2)** Install Ansible on your local machine. Ansible >=2.9 should work. See the [Ansible Installation Guide](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) for detailed instructions for your operating system. If you have Python 3 and venv installed, you can use this command:
 
 ```bash
 python3 -m venv venv
-venv/bin/pip install ansible
+venv/bin/pip install -r requirements.txt
 source .envrc  # Hint: Install Direnv (direnv.net) to do this automatically in the future.
 ```
 

@@ -26,6 +26,7 @@ There are several components (roles):
 **Web servers**
 
 - [nginx](https://github.com/punktDe/proserver-ansible-nginx)
+- [Apache](https://github.com/punktDe/proserver-ansible-apache)
 
 **Mail servers**
 
@@ -34,7 +35,7 @@ There are several components (roles):
 
 **Other components**
 
-- [MOTD](https://github.com/punktDe/proserver-ansible-motd) (show host info upon login)
+- [System](https://github.com/punktDe/proserver-ansible-system) (base system configuration)
 - [PHP and PHP-FPM](https://github.com/punktDe/proserver-ansible-php)
 - [Supervisor](https://github.com/punktDe/proserver-ansible-supervisord) (to manage custom daemons)
 - [OAuth2 Proxy](https://github.com/punktDe/proserver-ansible-oauth2-proxy) (for advanced access control)

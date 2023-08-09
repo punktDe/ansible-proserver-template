@@ -1,0 +1,40 @@
+{% if ansible_local.proserver.routing.with_gate64 -%}
+<VirtualHost *:80 [::]:87>
+{% else %}
+<VirtualHost *:80>
+{% endif %}
+
+  ServerName {{ typo3.domain }}
+  RewriteEngine On
+  RewriteCond %{REQUEST_URI} !^/\.well\-known/acme\-challenge/
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=301,L]
+</VirtualHost>
+
+{% if dehydrated | cert_exists(typo3.domain) %}
+{% if ansible_local.proserver.routing.with_gate64 -%}
+<VirtualHost *:443 [::]:53>
+{% else %}
+<VirtualHost *:443>
+{% endif %}
+    ServerName {{ typo3.domain }}
+    DocumentRoot {{ typo3.prefix.current_release }}/public
+    DirectoryIndex index.php
+    Charset utf-8
+
+    SSLEngine on
+    SSLCertificateFile {{ dehydrated | cert_fullchain(typo3.domain) }}
+    SSLCertificateKeyFile {{ dehydrated | cert_privkey(typo3.domain) }}
+
+    <Directory "{{ typo3.prefix.current_release }}/public">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ /index.php/$1 [L]
+
+</VirtualHost>
+{% endif %}

@@ -2,17 +2,11 @@
 ################################################################################
 # Operating system                                                             #
 ################################################################################
-- name: Message of the Day
-  hosts: motd
+- name: System
+  hosts: system
   become: yes
   roles:
-    - motd
-
-- name: Mail
-  hosts: mail
-  become: yes
-  roles:
-    - mail
+    - system
 
 ################################################################################
 # Databases                                                                    #
@@ -22,12 +16,6 @@
   become: yes
   roles:
     - redis
-
-- name: PostgreSQL
-  hosts: postgresql
-  become: yes
-  roles:
-    - postgresql
 
 - name: MariaDB
   hosts: mariadb
@@ -44,20 +32,10 @@
 ################################################################################
 # Applications                                                                 #
 ################################################################################
-- name: MailHog
-  hosts: mailhog
-  become: yes
-  roles:
-    - mailhog
-
-- name: Neos
-  hosts: neos
-  become: yes
-  roles:
-    - neos
-
 - name: TYPO3
   hosts: typo3
   become: yes
+  tags:
+    - typo3
   roles:
     - typo3

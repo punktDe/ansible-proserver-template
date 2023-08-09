@@ -10,3 +10,26 @@ oauth2_proxy:
       <sub>(Update oauth2_proxy.branding in group_vars/all.yaml!)</sub>
     footer: >
       <a href="https://example.com">example.com</a> OAuth2 Proxy v{% raw %}{{.Version}}{% endraw %}
+
+typo3:
+  domain: "{{ inventory_hostname }}"
+  context: "Production"
+
+mariadb:
+  databases:
+    typo3:
+      name: typo3-stg
+  users:
+    typo3:
+      username: typo3-stg
+      password: typo3-stg
+      hosts:
+        typo3: localhost
+      privileges:
+        typo3: "typo3-stg.*:all"
+
+dehydrated:
+  domains:
+    vpro1413.proserver.punkt.de: []
+  httpd_service: 
+    name: apache24

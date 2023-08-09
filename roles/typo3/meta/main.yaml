@@ -1,4 +1,4 @@
 ---
 dependencies:
-  - role: nginx
+  - role: apache
   - role: php

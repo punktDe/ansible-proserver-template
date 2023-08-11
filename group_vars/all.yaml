@@ -1,6 +1,4 @@
 ---
-motd:
-  project: Update motd.project in group_vars/all.yaml!
 oauth2_proxy:
   # This will add branding to all your OAuth2 proxy login pages.
   # You should adapt this to your company's brand.
@@ -11,29 +9,7 @@ oauth2_proxy:
     footer: >
       <a href="https://example.com">example.com</a> OAuth2 Proxy v{% raw %}{{.Version}}{% endraw %}
 
-typo3:
-  domain: "vpro0000.proserver.punkt.de"
-  context: "Production"
-
-mariadb:
-  databases:
-    typo3:
-      name: typo3-stg
-  users:
-    typo3:
-      username: typo3-stg
-      password: typo3-stg
-      hosts:
-        typo3: localhost
-      privileges:
-        typo3: "typo3-stg.*:all"
-
-dehydrated:
-  domains:
-    vpro0000.proserver.punkt.de: []
-  httpd_service:
-    name: apache24
-
-apache:
-  redirects:
-    http://vpro0000.proserver.punkt.de: https://vpro0000.proserver.punkt.de
+mailhog:
+  domain: mailhog.vpro0000.proserver.punkt.de
+  basic_auth:
+    test: changeme

@@ -7,6 +7,9 @@
 
 {% for i in http_listeners %}
 <VirtualHost {{ i }}>
+  {% if "87" in i %}
+  RemoteIPProxyProtocol On
+  {% endif %}
   ServerName {{ typo3.domain }}
   RewriteEngine On
   RewriteCond %{REQUEST_URI} !^/\.well\-known/acme\-challenge/
@@ -17,7 +20,9 @@
 {% if dehydrated | cert_exists(typo3.domain) %}
 {% for i in https_listeners %}
 <VirtualHost {{ i }}>
+    {% if "57" in i %}
     RemoteIPProxyProtocol On
+    {% endif %}
     ServerName {{ typo3.domain }}
     DocumentRoot {{ typo3.prefix.current_release }}/public
     DirectoryIndex index.php

@@ -4,3 +4,4 @@
 /.vagrant
 /.fact_cache
 /venv/
+group_vars/staging.yaml

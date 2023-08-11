@@ -12,7 +12,7 @@ oauth2_proxy:
       <a href="https://example.com">example.com</a> OAuth2 Proxy v{% raw %}{{.Version}}{% endraw %}
 
 typo3:
-  domain: "{{ inventory_hostname }}"
+  domain: "vpro0000.proserver.punkt.de"
   context: "Production"
 
 mariadb:
@@ -30,6 +30,10 @@ mariadb:
 
 dehydrated:
   domains:
-    vpro1413.proserver.punkt.de: []
-  httpd_service: 
+    vpro0000.proserver.punkt.de: []
+  httpd_service:
     name: apache24
+
+apache:
+  redirects:
+    http://vpro0000.proserver.punkt.de: https://vpro0000.proserver.punkt.de

@@ -4,4 +4,5 @@
 /.vagrant
 /.fact_cache
 /venv/
-group_vars/staging.yaml
+inventory_dev.ini
+host_vars/vpro1413.proserver.punkt.de.yaml

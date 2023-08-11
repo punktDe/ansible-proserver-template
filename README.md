@@ -11,35 +11,35 @@ There are several components (roles):
 
 **Relational databases**
 
-- [PostgreSQL](https://github.com/punktDe/proserver-ansible-postgresql)
-- [MySQL / MariaDB](https://github.com/punktDe/proserver-ansible-mariadb)
+- [PostgreSQL](https://github.com/punktDe/ansible-proserver-postgresql)
+- [MySQL / MariaDB](https://github.com/punktDe/ansible-proserver-mariadb)
 
 **Full text search databases**
 
-- [Elasticsearch](https://github.com/punktDe/proserver-ansible-elasticsearch)
+- [Elasticsearch](https://github.com/punktDe/ansible-proserver-elasticsearch)
 - Apache Solr (planned)
 
 **In-memory databases**
 
-- [Redis](https://github.com/punktDe/proserver-ansible-redis)
+- [Redis](https://github.com/punktDe/ansible-proserver-redis)
 
 **Web servers**
 
-- [nginx](https://github.com/punktDe/proserver-ansible-nginx)
-- [Apache](https://github.com/punktDe/proserver-ansible-apache)
+- [nginx](https://github.com/punktDe/ansible-proserver-nginx)
+- [Apache](https://github.com/punktDe/ansible-proserver-apache)
 
 **Mail servers**
 
-- [Sendmail](https://github.com/punktDe/proserver-ansible-mail) (for production)
-- [MailHog](https://github.com/punktDe/proserver-ansible-mailhog) (for testing)
+- [Sendmail](https://github.com/punktDe/ansible-proserver-mail) (for production)
+- [MailHog](https://github.com/punktDe/ansible-proserver-mailhog) (for testing)
 
 **Other components**
 
-- [System](https://github.com/punktDe/proserver-ansible-system) (base system configuration)
-- [PHP and PHP-FPM](https://github.com/punktDe/proserver-ansible-php)
-- [Supervisor](https://github.com/punktDe/proserver-ansible-supervisord) (to manage custom daemons)
-- [OAuth2 Proxy](https://github.com/punktDe/proserver-ansible-oauth2-proxy) (for advanced access control)
-- [Dehydrated](https://github.com/punktDe/proserver-ansible-dehydrated) (for acquiring X.509 certificates using ACME / Let's Encrypt)
+- [System](https://github.com/punktDe/ansible-proserver-system) (base system configuration)
+- [PHP and PHP-FPM](https://github.com/punktDe/ansible-proserver-php)
+- [Supervisor](https://github.com/punktDe/ansible-proserver-supervisord) (to manage custom daemons)
+- [OAuth2 Proxy](https://github.com/punktDe/ansible-proserver-oauth2-proxy) (for advanced access control)
+- [Dehydrated](https://github.com/punktDe/ansible-proserver-dehydrated) (for acquiring X.509 certificates using ACME / Let's Encrypt)
 
 ## Getting Started
 

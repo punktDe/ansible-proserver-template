@@ -1,6 +1,8 @@
 ---
 - name: Template apache configuration
-  template: src="{{ item }}" dest="{{ render_path }}"
+  template: 
+    src: "{{ item }}" 
+    dest: "{{ render_path }}"
   loop_control:
     label: "{{ render_path }}"
   vars:

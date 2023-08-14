@@ -25,6 +25,8 @@ There are several components (roles):
 
 **Web servers**
 
+You can choose which web server to install by adding your host to the respective group (`apache` or `nginx`) in `inventory.ini`. Default is nginx
+
 - [nginx](https://github.com/punktDe/ansible-proserver-nginx)
 - [Apache](https://github.com/punktDe/ansible-proserver-apache)
 

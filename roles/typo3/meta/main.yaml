@@ -1,9 +1,9 @@
 ---
 dependencies:
   - role: apache
-    when: '"apache" in dehydrated.httpd_service.name'
+    when: groups.apache is defined and inventory_hostname in groups.apache
   - role: nginx
-    when: '"nginx" in dehydrated.httpd_service.name'
+    when: groups.apache is not defined or inventory_hostname not in groups.apache
   - role: oauth2_proxy
     when: typo3.oauth2_proxy
   - role: php

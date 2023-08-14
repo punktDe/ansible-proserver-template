@@ -1,4 +1,9 @@
 ---
 dependencies:
   - role: apache
+    when: '"apache" in dehydrated.httpd_service.name'
+  - role: nginx
+    when: '"nginx" in dehydrated.httpd_service.name'
+  - role: oauth2_proxy
+    when: typo3.oauth2_proxy
   - role: php

@@ -2,11 +2,11 @@
 ################################################################################
 # Operating system                                                             #
 ################################################################################
-- name: Message of the Day
-  hosts: motd
+- name: System
+  hosts: system
   become: yes
   roles:
-    - motd
+    - system
 
 - name: Mail
   hosts: mail
@@ -47,17 +47,27 @@
 - name: MailHog
   hosts: mailhog
   become: yes
+  tags:
+    - mailhog
   roles:
     - mailhog
 
-- name: Neos
-  hosts: neos
-  become: yes
-  roles:
-    - neos
-
 - name: TYPO3
-  hosts: typo3
+  hosts: 
+    - typo3
+    - typo3_test
   become: yes
+  tags:
+    - typo3
   roles:
     - typo3
+
+- name: Neos
+  hosts: 
+    - neos
+    - neos_test
+  become: yes
+  tags:
+    - neos
+  roles:
+    - neos

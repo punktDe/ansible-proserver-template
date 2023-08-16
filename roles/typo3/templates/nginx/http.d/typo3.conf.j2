@@ -1,45 +1,101 @@
+{% if dehydrated | cert_exists(typo3.domain) %}
 server {
-    {% if dehydrated|cert_exists(typo3.domain) -%}
-    listen 0.0.0.0:443 ssl http2;
-    listen [::]:443 ssl http2;
-    {% if ansible_local.proserver.routing.with_gate64 -%}
-    listen [::1]:57 ssl http2 proxy_protocol;
-    {%- endif %}
-    {% else %}
     listen 0.0.0.0:80;
     listen [::]:80;
-    {% if ansible_local.proserver.routing.with_gate64 -%}
+    {% if ansible_local.proserver|default(none) and ansible_local.proserver.routing.with_gate64 -%}
     listen [::1]:87 proxy_protocol;
     {%- endif %}
-    {% endif %}
 
     server_name {{ typo3.domain }};
 
+    root /var/null;
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+
+    include {{ nginx.prefix.config }}/include/letsencrypt.conf;
+}
+
+server {
+    listen 0.0.0.0:443 ssl http2; 
+    listen [::]:443 ssl http2;
+    {% if ansible_local.proserver|default(none) and ansible_local.proserver.routing.with_gate64 -%}
+    listen [::1]:57 ssl http2 proxy_protocol;
+    {%- endif %}
+
+    server_name {{ typo3.domain }};
     root {{ typo3.prefix.current_release }}/public;
     index index.php;
     charset utf-8;
 
+    include {{ nginx.prefix.config }}/include/security_headers.conf;
+
+    {% if typo3.oauth2_proxy -%}
+    location /proserver/iap {
+      proxy_pass http://[::1]:{{ oauth2_proxy.config[typo3.oauth2_proxy].http_address.split(":")[-1] }};
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Scheme $scheme;
+      proxy_set_header X-Auth-Request-Redirect $request_uri;
+    }
+
+    location = /proserver/iap/auth {
+      proxy_pass http://[::1]:{{ oauth2_proxy.config[typo3.oauth2_proxy].http_address.split(":")[-1] }};
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Scheme $scheme;
+      proxy_set_header Content-Length "";
+      proxy_pass_request_body off;
+    }
+    {% endif %}
+
     location / {
-        try_files $uri $uri/ /index.php$is_args$args;
+      {% if typo3.oauth2_proxy -%}
+      auth_request /proserver/iap/auth;
+      error_page 401 = /proserver/iap/sign_in;
+      auth_request_set $auth_cookie $upstream_http_set_cookie;
+      add_header Set-Cookie $auth_cookie;
+      {% endif %}
+      try_files $uri $uri/ /index.php$is_args$args;
     }
 
     location ~ \.php$ {
-        try_files $uri =404;
-        include {{ nginx.prefix.config }}/fastcgi_params;
-        fastcgi_index index.php;
-        fastcgi_split_path_info ^(.+\.php)(.*)$;
-        fastcgi_param PATH_INFO $fastcgi_path_info;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_param FLOW_REWRITEURLS 1;
-        fastcgi_param X-Real-IP $remote_addr;
-        fastcgi_param X-Forwarded-For $remote_addr;
-        fastcgi_param X-Request-ID $ensure_request_id;
-        fastcgi_pass unix:/var/run/php-fpm/php-fpm.socket;
+      try_files $uri =404;
+      include {{ nginx.prefix.config }}/fastcgi_params;
+      fastcgi_index index.php;
+      fastcgi_split_path_info ^(.+\.php)(.*)$;
+      fastcgi_param PATH_INFO $fastcgi_path_info;
+      fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+      fastcgi_param FLOW_REWRITEURLS 1;
+      fastcgi_param X-Real-IP $remote_addr;
+      fastcgi_param X-Forwarded-For $remote_addr;
+      fastcgi_param X-Request-ID $ensure_request_id;
+      fastcgi_pass unix:/var/run/php-fpm/php-fpm.socket;
     }
 
-    {% if dehydrated|cert_exists(typo3.domain) %}
-    ssl_certificate {{ dehydrated|cert_fullchain(typo3.domain) }};
-    ssl_certificate_key {{ dehydrated|cert_privkey(typo3.domain) }};
-    include {{ nginx.prefix.config }}/https_params.conf;
-    {% endif %}
+    ssl_certificate {{ dehydrated | cert_fullchain(typo3.domain) }};
+    ssl_certificate_key {{ dehydrated | cert_privkey(typo3.domain) }};
+    ssl_trusted_certificate {{ dehydrated | cert_chain(typo3.domain) }};
+    include {{ nginx.prefix.config }}/include/https_params.conf;
 }
+{% else %}
+server {
+    listen 0.0.0.0:80;
+    listen [::]:80;
+    {% if ansible_local.proserver|default(none) and ansible_local.proserver.routing.with_gate64 -%}
+    listen [::1]:87 proxy_protocol;
+    {%- endif %}
+
+    server_name {{ typo3.domain }}
+
+    root /var/null;
+
+    location ^~ /.well-known/acme-challenge/ {
+        # No need to redirect ACME challenge requests
+        allow all;
+        root {{ dehydrated.config.WELLKNOWN }};
+    }
+
+}
+{% endif %}

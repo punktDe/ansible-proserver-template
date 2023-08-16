@@ -6,4 +6,5 @@ typo3:
     # Deployer-style release path
     current_release: /var/www/typo3/current
     # Surf-style release path
-    #current_release: /var/www/typo3/releases/current
+    # current_release: /var/www/typo3/releases/current
+  oauth2_proxy:

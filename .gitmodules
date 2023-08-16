@@ -31,6 +31,9 @@
 [submodule "roles/postgresql"]
 	path = roles/postgresql
 	url = https://github.com/punktDe/proserver-ansible-postgresql.git
-[submodule "roles/motd"]
-	path = roles/motd
-	url = https://github.com/punktDe/proserver-ansible-motd.git
+[submodule "roles/apache"]
+	path = roles/apache
+	url = https://github.com/punktDe/ansible-proserver-apache
+[submodule "roles/system"]
+	path = roles/system
+	url = https://github.com/punktDe/ansible-proserver-system

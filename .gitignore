@@ -4,3 +4,5 @@
 /.vagrant
 /.fact_cache
 /venv/
+inventory_dev.ini
+host_vars/vpro*

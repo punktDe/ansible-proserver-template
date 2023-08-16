@@ -1,3 +1,8 @@
 ---
-- import_tasks: nginx.yaml
-- import_tasks: typo3.yaml
+- include_tasks: apache.yaml
+  when: groups.apache is defined and inventory_hostname in groups.apache
+
+- include_tasks: nginx.yaml
+  when: groups.apache is not defined or inventory_hostname not in groups.apache
+
+- include_tasks: typo3.yaml

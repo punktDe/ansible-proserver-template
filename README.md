@@ -48,11 +48,11 @@ You can choose which web server to install by adding your host to the respective
 **1)** Clone this repository and submodules
 
 ```bash
-git clone --recurse-submodules https://github.com/punktDe/proserver-ansible-template.git
-cd proserver-ansible-template
+git clone --recurse-submodules git@github.com:punktDe/ansible-proserver-template.git
+cd ansible-proserver-template
 ```
 
-**2)** Install Ansible on your local machine. Ansible >=2.9 should work. See the [Ansible Installation Guide](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) for detailed instructions for your operating system. If you have Python 3 and venv installed, you can use this command:
+**2)** Install Ansible on your local machine. Ansible >=2.15 should work. See the [Ansible Installation Guide](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) for detailed instructions for your operating system. If you have Python 3 and venv installed, you can use this command:
 
 ```bash
 python3 -m venv venv
@@ -84,46 +84,6 @@ mv host_vars_examples/neos/* host_vars/
 ```
 
 Then replace at least any occurrence of `vpro0000` with your proServer ID(s).
-
-## Local development environment with Vagrant and VirtualBox
-
-**1)** Install Vagrant and VirtualBox
-
-On macOS, you can install Vagrant and VirtualBox via Homebrew:
-
-```bash
-brew cask install vagrant virtualbox
-```
-
-Ubuntu:
-
-```bash
-sudo apt-get install vagrant virtualbox
-```
-
-**2)** Clone this repository and it's submodules
-
-```bash
-git clone --recurse-submodules https://github.com/punktDe/proserver-ansible-example.git
-cd proserver-ansible-example
-```
-
-**3)** Start proServer as a virtual machine using Vagrant
-
-```bash
-vagrant up --provision
-```
-
-**4)** Update `/etc/hosts` to include virtual host names used in your playbook
-
-You can also use your own domain if you like.
-Just update `neos.domain` and `mailhog.domain` in your host vars.
-
-```bash
-echo "172.17.78.40 neos.proserver-dev.local typo3.proserver-dev.local mailhog.proserver-dev.local" | sudo tee -a /etc/hosts
-```
-
-**5)** Go to [http://neos.proserver-dev.local](http://neos.proserver-dev.local)
 
 ## Start provisioning of your proServer
 
@@ -186,4 +146,3 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['trustedHostsPattern'] = getenv('SITE_DOMAIN'
 
 - [Ansible Installation Guide](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 - [Ansible Getting Started](https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html)
-- [Vagrant Getting Started](https://www.vagrantup.com/intro/getting-started/index.html)

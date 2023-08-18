@@ -48,7 +48,7 @@ You can choose which web server to install by adding your host to the respective
 **1)** Clone this repository and submodules
 
 ```bash
-git clone --recurse-submodules https://github.com/punktDe/ansible-proserver-template.git
+git clone --recurse-submodules git@github.com:punktDe/ansible-proserver-template.git
 cd ansible-proserver-template
 ```
 

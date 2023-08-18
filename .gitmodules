@@ -1,39 +1,39 @@
 [submodule "roles/dehydrated"]
 	path = roles/dehydrated
-	url = https://github.com/punktDe/ansible-proserver-dehydrated.git
+	url = ssh://git@github.com:punktDe/ansible-proserver-dehydrated.git
 [submodule "roles/mariadb"]
 	path = roles/mariadb
-	url = https://github.com/punktDe/ansible-proserver-mariadb.git
+	url = ssh://git@github.com:punktDe/ansible-proserver-mariadb.git
 [submodule "roles/elasticsearch"]
 	path = roles/elasticsearch
-	url = https://github.com/punktDe/ansible-proserver-elasticsearch.git
+	url = ssh://git@github.com:punktDe/ansible-proserver-elasticsearch.git
 [submodule "roles/mail"]
 	path = roles/mail
-	url = https://github.com/punktDe/ansible-proserver-mail.git
+	url = ssh://git@github.com:punktDe/ansible-proserver-mail.git
 [submodule "roles/redis"]
 	path = roles/redis
-	url = https://github.com/punktDe/ansible-proserver-redis.git
+	url = ssh://git@github.com:punktDe/ansible-proserver-redis.git
 [submodule "roles/nginx"]
 	path = roles/nginx
-	url = https://github.com/punktDe/ansible-proserver-nginx.git
+	url = ssh://git@github.com:punktDe/ansible-proserver-nginx.git
 [submodule "roles/mailhog"]
 	path = roles/mailhog
-	url = https://github.com/punktDe/ansible-proserver-mailhog.git
+	url = ssh://git@github.com:punktDe/ansible-proserver-mailhog.git
 [submodule "roles/php"]
 	path = roles/php
-	url = https://github.com/punktDe/ansible-proserver-php.git
+	url = ssh://git@github.com:punktDe/ansible-proserver-php.git
 [submodule "roles/oauth2_proxy"]
 	path = roles/oauth2_proxy
-	url = https://github.com/punktDe/ansible-proserver-oauth2-proxy.git
+	url = ssh://git@github.com:punktDe/ansible-proserver-oauth2-proxy.git
 [submodule "roles/supervisord"]
 	path = roles/supervisord
-	url = https://github.com/punktDe/ansible-proserver-supervisord.git
+	url = ssh://git@github.com:punktDe/ansible-proserver-supervisord.git
 [submodule "roles/postgresql"]
 	path = roles/postgresql
-	url = https://github.com/punktDe/ansible-proserver-postgresql.git
+	url = ssh://git@github.com:punktDe/ansible-proserver-postgresql.git
 [submodule "roles/apache"]
 	path = roles/apache
-	url = https://github.com/punktDe/ansible-proserver-apache
+	url = ssh://git@github.com:punktDe/ansible-proserver-apache
 [submodule "roles/system"]
 	path = roles/system
-	url = https://github.com/punktDe/ansible-proserver-system
+	url = ssh://git@github.com:punktDe/ansible-proserver-system

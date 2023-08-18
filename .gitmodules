@@ -1,36 +1,36 @@
 [submodule "roles/dehydrated"]
 	path = roles/dehydrated
-	url = https://github.com/punktDe/proserver-ansible-dehydrated.git
+	url = https://github.com/punktDe/ansible-proserver-dehydrated.git
 [submodule "roles/mariadb"]
 	path = roles/mariadb
-	url = https://github.com/punktDe/proserver-ansible-mariadb.git
+	url = https://github.com/punktDe/ansible-proserver-mariadb.git
 [submodule "roles/elasticsearch"]
 	path = roles/elasticsearch
-	url = https://github.com/punktDe/proserver-ansible-elasticsearch.git
+	url = https://github.com/punktDe/ansible-proserver-elasticsearch.git
 [submodule "roles/mail"]
 	path = roles/mail
-	url = https://github.com/punktDe/proserver-ansible-mail.git
+	url = https://github.com/punktDe/ansible-proserver-mail.git
 [submodule "roles/redis"]
 	path = roles/redis
-	url = https://github.com/punktDe/proserver-ansible-redis.git
+	url = https://github.com/punktDe/ansible-proserver-redis.git
 [submodule "roles/nginx"]
 	path = roles/nginx
-	url = https://github.com/punktDe/proserver-ansible-nginx.git
+	url = https://github.com/punktDe/ansible-proserver-nginx.git
 [submodule "roles/mailhog"]
 	path = roles/mailhog
-	url = https://github.com/punktDe/proserver-ansible-mailhog.git
+	url = https://github.com/punktDe/ansible-proserver-mailhog.git
 [submodule "roles/php"]
 	path = roles/php
-	url = https://github.com/punktDe/proserver-ansible-php.git
+	url = https://github.com/punktDe/ansible-proserver-php.git
 [submodule "roles/oauth2_proxy"]
 	path = roles/oauth2_proxy
-	url = https://github.com/punktDe/proserver-ansible-oauth2-proxy.git
+	url = https://github.com/punktDe/ansible-proserver-oauth2-proxy.git
 [submodule "roles/supervisord"]
 	path = roles/supervisord
-	url = https://github.com/punktDe/proserver-ansible-supervisord.git
+	url = https://github.com/punktDe/ansible-proserver-supervisord.git
 [submodule "roles/postgresql"]
 	path = roles/postgresql
-	url = https://github.com/punktDe/proserver-ansible-postgresql.git
+	url = https://github.com/punktDe/ansible-proserver-postgresql.git
 [submodule "roles/apache"]
 	path = roles/apache
 	url = https://github.com/punktDe/ansible-proserver-apache

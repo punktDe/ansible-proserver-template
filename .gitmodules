@@ -37,3 +37,6 @@
 [submodule "roles/system"]
 	path = roles/system
 	url = https://github.com/punktDe/ansible-proserver-system
+[submodule "roles/solr"]
+	path = roles/solr
+	url = https://github.com/punktDe/ansible-proserver-solr

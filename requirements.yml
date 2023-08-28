@@ -1,0 +1,27 @@
+roles:
+  - name: punktde.proserver_dehydrated
+    src: https://github.com/punktDe/ansible-proserver-dehydrated
+  - name: punktde.proserver_mariadb
+    src: https://github.com/punktDe/ansible-proserver-mariadb
+  - name: punktde.proserver_elasticsearch
+    src: https://github.com/punktDe/ansible-proserver-elasticsearch
+  - name: punktde.proserver_mail
+    src: https://github.com/punktDe/ansible-proserver-mail
+  - name: punktde.proserver_redis
+    src: https://github.com/punktDe/ansible-proserver-redis
+  - name: punktde.proserver_nginx
+    src: https://github.com/punktDe/ansible-proserver-nginx
+  - name: punktde.proserver_mailhog
+    src: https://github.com/punktDe/ansible-proserver-mailhog
+  - name: punktde.proserver_php
+    src: https://github.com/punktDe/ansible-proserver-php
+  - name: punktde.proserver_oauth2_proxy
+    src: https://github.com/punktDe/ansible-proserver-ansible-oauth2-proxy
+  - name: punktde.proserver_supervisord
+    src: https://github.com/punktDe/ansible-proserver-ansible-supervisord
+  - name: punktde.proserver_postgresql
+    src: https://github.com/punktDe/ansible-proserver-ansible-postgresql
+  - name: punktde.proserver_apache
+    src: https://github.com/punktDe/ansible-proserver-ansible-apache
+  - name: punktde.proserver_system
+    src: https://github.com/punktDe/ansible-proserver-ansible-system

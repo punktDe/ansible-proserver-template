@@ -13,3 +13,5 @@ mailhog:
   domain: mailhog.vpro0000.proserver.punkt.de
   basic_auth:
     test: changeme
+
+ansible_python_interpreter: /usr/local/bin/python3

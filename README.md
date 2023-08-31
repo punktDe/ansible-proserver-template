@@ -17,7 +17,7 @@ There are several components (roles):
 **Full text search databases**
 
 - [Elasticsearch](https://github.com/punktDe/ansible-proserver-elasticsearch)
-- Apache Solr (planned)
+- [Apache Solr](https://github.com/punktDe/ansible-proserver-solr)
 
 **In-memory databases**
 

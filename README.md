@@ -45,10 +45,10 @@ You can choose which web server to install by adding your host to the respective
 
 ## Getting Started
 
-**1)** Clone this repository and submodules
+**1)** Clone this repository
 
 ```bash
-git clone --recurse-submodules https://github.com/punktDe/ansible-proserver-template.git
+git clone https://github.com/punktDe/ansible-proserver-template.git
 cd ansible-proserver-template
 ```
 
@@ -57,10 +57,20 @@ cd ansible-proserver-template
 ```bash
 python3 -m venv venv
 venv/bin/pip install -r requirements.txt
-source .envrc  # Hint: Install Direnv (direnv.net) to do this automatically in the future.
+source .envrc 
 ```
 
-**3)** Adapt Ansible configuration
+You can also use [direnv](https://direnv.net/) to automatically activate the virtual environment when you enter the project folder.
+
+**3)** Install role dependencies
+
+This project uses Ansible Galaxy to manage role dependencies:
+
+```bash
+ansible-galaxy -r requirements.yml --force
+```
+
+**5)** Adapt Ansible configuration
 
 Basically there are two files, that define the services and configuration for your proServer instance:
 
@@ -84,6 +94,16 @@ mv host_vars_examples/neos/* host_vars/
 ```
 
 Then replace at least any occurrence of `vpro0000` with your proServer ID(s).
+
+## Secret management
+
+We recommend using [bitwarden-cli](https://bitwarden.com/help/cli/) to manage secrets.
+
+After setting up the CLI client, replace the placeholder in `vault_password_file_example` with the name of the password in your Bitwarden vault, and rename the file to `vault_password_file`.
+
+It's also possible to use another password manager or a secret management system, as long as it can output the secret in plaintext.
+
+Alternatively, you can remove the executable bit from `vault_password_file` and put your vault password in clear text. However, this is not recommended.
 
 ## Start provisioning of your proServer
 

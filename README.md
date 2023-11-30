@@ -70,7 +70,7 @@ This project uses Ansible Galaxy to manage role dependencies:
 ansible-galaxy -r requirements.yml --force
 ```
 
-**5)** Adapt Ansible configuration
+**4)** Adapt Ansible configuration
 
 Basically there are two files, that define the services and configuration for your proServer instance:
 

@@ -1,0 +1,8 @@
+---
+roles:
+  - name: system
+    src: https://github.com/punktDe/ansible-proserver-system
+  - name: dehydrated
+    src: https://github.com/punktDe/ansible-proserver-dehydrated
+  - name: nginx
+    src: https://github.com/punktDe/ansible-proserver-nginx

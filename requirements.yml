@@ -24,7 +24,7 @@ roles:
     src: https://github.com/punktDe/ansible-proserver-mariadb
   - name: nginx
     src: https://github.com/punktDe/ansible-proserver-nginx
-    version: "1.0.1"
+    version: "1.1.0"
   - name: oauth2_proxy
     src: https://github.com/punktDe/ansible-proserver-oauth2-proxy
     version: "1.0.1"
@@ -43,4 +43,4 @@ roles:
     src: https://github.com/punktDe/ansible-proserver-supervisord
   - name: system
     src: https://github.com/punktDe/ansible-proserver-system
-    version: "1.4.1"
+    version: "1.5.0"

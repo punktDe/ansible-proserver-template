@@ -1,0 +1,25 @@
+---
+skip_list:
+  - 'meta-no-info'
+  - var-naming[no-role-prefix]
+
+warn_list:
+  - package-latest
+  - unnamed-task
+
+exclude_paths:
+  - group_vars/secrets.*
+  - roles/dehydrated
+  - roles/mailhog
+  - roles/postgresql
+  - roles/mail
+  - roles/mariadb
+  - roles/nginx
+  - roles/elasticsearch
+  - roles/oauth2_proxy
+  - roles/php
+  - roles/redis
+  - roles/supervisord
+  - roles/system
+  - roles/apache
+  - roles/solr

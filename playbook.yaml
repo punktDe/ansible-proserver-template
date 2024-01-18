@@ -49,8 +49,6 @@
   tags:
     - solr
 
-
-
 ################################################################################
 # Applications                                                                 #
 ################################################################################
@@ -63,7 +61,7 @@
     - mailhog
 
 - name: TYPO3
-  hosts: 
+  hosts:
     - typo3
     - typo3_test
   become: yes
@@ -73,7 +71,7 @@
     - typo3
 
 - name: Neos
-  hosts: 
+  hosts:
     - neos
     - neos_test
   become: yes

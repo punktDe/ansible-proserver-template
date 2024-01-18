@@ -58,7 +58,7 @@ mariadb:
       privileges:
         typo3: "typo3-dev.*:all"
 
-#postgresql:
+# postgresql:
 #  # The dictionary keys ("neos") will not be used by the role (except for the owner field, read the comment below).
 #  # This way you can use Ansible's variable precedence to define a default and override it if needed. For example,
 #  # you could define a default database name and password for your app in group vars and override it in host vars.

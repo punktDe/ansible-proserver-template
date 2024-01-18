@@ -58,17 +58,10 @@ cd ansible-proserver-template
 python3 -m venv venv
 venv/bin/pip install -r requirements.txt
 source .envrc 
+ansible-galaxy install -r requirements.yml
 ```
 
-You can also use [direnv](https://direnv.net/) to automatically activate the virtual environment when you enter the project folder.
-
-**3)** Install role dependencies
-
-This project uses Ansible Galaxy to manage role dependencies:
-
-```bash
-ansible-galaxy -r requirements.yml --force
-```
+You can also use [direnv](https://direnv.net/) to automatically activate the virtual environment and install dependencies when you enter the project folder.
 
 **4)** Adapt Ansible configuration
 

@@ -1,22 +1,40 @@
 server {
-    {% if dehydrated|cert_exists(neos.domain) -%}
-    listen 0.0.0.0:443 ssl http2;
-    listen [::]:443 ssl http2;
-    {% if ansible_local.proserver.routing.with_gate64 -%}
-    listen [::1]:57 ssl http2 proxy_protocol;
-    {%- endif %}
-    {% else %}
     listen 0.0.0.0:80;
     listen [::]:80;
-    {% if ansible_local.proserver.routing.with_gate64 -%}
+    {% if ansible_local.proserver|default(none) and ansible_local.proserver.routing.with_gate64 -%}
     listen [::1]:87 proxy_protocol;
     {%- endif %}
-    {% endif %}
+
+    server_name {{ neos.domain }};
+
+    root /var/null;
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+
+    include {{ nginx.prefix.config }}/include/letsencrypt.conf;
+}
+
+{% if dehydrated|cert_exists(neos.domain) %}
+server {
+    # nginx < 1.25.1
+    listen 0.0.0.0:443 ssl http2;
+    listen [::]:443 ssl http2;
+
+    # nginx >= 1.25.1
+    # listen 0.0.0.0:443 ssl;
+    # listen [::]:443 ssl;
+    # http2 on;
+
+    {% if ansible_local.proserver.routing.with_gate64 -%}
+    listen [::1]:57 ssl proxy_protocol;
+    {%- endif %}
 
     server_name {{ neos.domain }};
 
     root {{ neos.prefix.current_release }}/Web;
-    index index.php;
+    index index.php index html;
     charset utf-8;
 
     location / {
@@ -37,9 +55,10 @@ server {
         fastcgi_pass unix:/var/run/php-fpm/php-fpm.socket;
     }
 
-    {% if dehydrated|cert_exists(neos.domain) %}
+
     ssl_certificate {{ dehydrated|cert_fullchain(neos.domain) }};
     ssl_certificate_key {{ dehydrated|cert_privkey(neos.domain) }};
     include {{ nginx.prefix.config }}/https_params.conf;
-    {% endif %}
+
 }
+{% endif %}

@@ -12,7 +12,7 @@ dehydrated:
   # The certificate will automatically be issued and updated, you only need to use it in your nginx configuration
   # (see roles/typo3/templates/nginx/http.d/typo3.conf.j2 for example).
   domains:
-    #Common_Name: ['Subject', 'Alternative', 'Names']
+    # Common_Name: ['Subject', 'Alternative', 'Names']
     vpro0000.proserver.punkt.de: []
 
 nginx:
